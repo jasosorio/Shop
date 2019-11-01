@@ -27,9 +27,12 @@ namespace Shop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(cfg =>
-            {
+            {   
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddTransient<SeedDb>();
+            services.AddScoped<IRepository, Repository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
